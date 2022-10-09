@@ -1,7 +1,7 @@
 import json
 from scrapy.utils.project import get_project_settings
 import scrapy
-import django
+import psycopg2
 
 class McxSpider(scrapy.Spider):
     name = 'mcx'
@@ -28,3 +28,64 @@ class McxSpider(scrapy.Spider):
                 print(dataitem)
                 data.append(dataitem)
                 i+=1
+
+def bulkInsert(records):
+    try:
+        connection = psycopg2.connect(user="xenon",
+                                      password="",
+                                      host="127.0.0.1",
+                                      port="5432",
+                                      database="mystats")
+        cursor = connection.cursor()
+        sql_insert_query = """ INSERT INTO stats (id, model, price) VALUES (%s,%s,%s) """
+
+        # executemany() to insert multiple rows
+        result = cursor.executemany(sql_insert_query, records)
+        connection.commit()
+        print(cursor.rowcount, "Record inserted successfully into mobile table")
+
+    except (Exception, psycopg2.Error) as error:
+        print("Failed inserting record into mobile t able {}".format(error))
+
+    finally:
+        # closing database connection.
+        if connection:
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
+
+records_to_insert = [(4, 'LG', 800), (5, 'One Plus 6', 950)]
+bulkInsert(records_to_insert)
+
+def updateInBulk(records):
+    try:
+        ps_connection = psycopg2.connect(user="xenon",
+                                         password="",
+                                         host="127.0.0.1",
+                                         port="5432",
+                                         database="mystats")
+        cursor = ps_connection.cursor()
+
+        # Update multiple records
+        sql_update_query = """Update mobile set price = %s where id = %s"""
+        cursor.executemany(sql_update_query, records)
+        ps_connection.commit()
+
+        row_count = cursor.rowcount
+        print(row_count, "Records Updated")
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error while updating PostgreSQL table", error)
+
+    finally:
+        # closing database connection.
+        if ps_connection:
+            cursor.close()
+            ps_connection.close()
+            print("PostgreSQL connection is closed")
+
+
+tuples = [(750, 4), (950, 5)]
+updateInBulk(tuples)
+
+
