@@ -1,10 +1,10 @@
 from django.shortcuts import render
 
-from db.models import stats
+from db.models import statslist
 
 def jsonout(request, pk):
-    stats_obj = stats.objects.get(pk=pk)
+    statslist_obj = statslist.objects.get(pk=pk)
     context = {
-        "data":stats.objs,
+        "data":statslist.objs,
     }
     return( request, "stats_detail.html", context)
