@@ -14,6 +14,7 @@ class McxSpider(scrapy.Spider):
         data = []
         while i<rows:
                 dataitem = (
+                    i+1,
                      response.xpath('//div[@id="indexes-div"]/div/div/table/tr/td/a/text()')[i].get(),
                     #[0] has been used to extract the string from a list of one element
                     #There are 8 rows, hence i*8 has been used to extract each attribute from the row i
@@ -38,7 +39,7 @@ def bulkInsert(records):
                                       port="5432",
                                       database="mystats")
         cursor = connection.cursor()
-        sql_insert_query = """ INSERT INTO db_statslist (Symbol, Last, Change, Changeperc, Close, High, Low, LastTrade) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) """
+        sql_insert_query = """ INSERT INTO db_statslist (id,Symbol,Last,Change,Changeperc,Close,High,Low,LastTrade) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) """
 
         # executemany() to insert multiple rows
         result = cursor.executemany(sql_insert_query, records)

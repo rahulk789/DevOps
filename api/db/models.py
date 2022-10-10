@@ -3,12 +3,12 @@ from django.db import models
 # Create your models here.
 
 class statslist(models.Model):
-    Symbol = models.CharField(max_length=200)
-    Last = models.CharField(max_length=200)
-    Change = models.CharField(max_length=200)
-    Changeperc = models.CharField(max_length=200)
-    Close = models.CharField(max_length=200)
-    High = models.CharField(max_length=200)
-    Low = models.CharField(max_length=200)
-    LastTrade = models.CharField(max_length=200)
+    symbol = models.CharField(max_length=200)
+    last = models.CharField(max_length=200)
+    change = models.CharField(max_length=200)
+    changeperc = models.CharField(max_length=200)
+    close = models.CharField(max_length=200)
+    high = models.CharField(max_length=200)
+    low = models.CharField(max_length=200)
+    lasttrade = models.CharField(max_length=200)
 
