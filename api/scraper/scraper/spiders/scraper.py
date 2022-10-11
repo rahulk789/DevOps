@@ -39,6 +39,7 @@ def bulkInsert(records):
                                       port="5432",
                                       database="mystats")
         cursor = connection.cursor()
+        cursor.execute("DELETE FROM db_statslist", ())
         sql_insert_query = """ INSERT INTO db_statslist (id,Symbol,Last,Change,Changeperc,Close,High,Low,LastTrade) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) """
 
         # executemany() to insert multiple rows

@@ -6,6 +6,5 @@ from . import views
 
 urlpatterns = [
 
-    path("<int:pk>/", views.statslist, name="statslist"),
 
 ]
