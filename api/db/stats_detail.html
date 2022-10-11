@@ -1,8 +1,8 @@
 <html>
     <body>
         <br> Symbol | Last | Change | Changeperc | Close | High | Low | LastTrade <br>
-        {% for s in stats %}
-        <br><p>{{ s.Symbol }}|{{s.Last}}| {{ s.Change}}| {{ s.Changeperc}}| {{ s.Close}}| {{ s.High}}| {{ s.Low}}| {{ s.LastTrade}}</p>
+        {% for s in statslist_obj.all %}
+        <br><p>{{ s.symbol }}|{{s.last}}| {{ s.change}}| {{ s.changeperc}}| {{ s.close}}| {{ s.high}}| {{ s.low}}| {{ s.lasttrade}}</p>
         {% endfor %}
 
         </div>

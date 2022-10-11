@@ -2,13 +2,15 @@ from django.db import models
 
 # Create your models here.
 
-class stats(models.Model):
-    Symbol = models.CharField(max_length=200)
-    Last = models.IntegerField(default=0)
-    Change = models.IntegerField(default=0)
-    Changeperc = models.IntegerField(default=0)
-    Close = models.IntegerField(default=0)
-    High = models.IntegerField(default=0)
-    Low = models.IntegerField(default=0)
-    LastTrade = models.DateTimeField('date published')
+class statslist(models.Model):
+    symbol = models.CharField(max_length=200)
+    last = models.CharField(max_length=200)
+    change = models.CharField(max_length=200)
+    changeperc = models.CharField(max_length=200)
+    close = models.CharField(max_length=200)
+    high = models.CharField(max_length=200)
+    low = models.CharField(max_length=200)
+    lasttrade = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
