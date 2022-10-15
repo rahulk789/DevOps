@@ -33,10 +33,7 @@ class McxSpider(scrapy.Spider):
 
 def bulkInsert(records):
     try:
-        connection = psycopg2.connect(user="xenon",
-                                      password="",
-                                      host="127.0.0.1",
-                                      port="5432",
+        connection = psycopg2.connect(
                                       database="mystats")
         cursor = connection.cursor()
         cursor.execute("DELETE FROM db_statslist", ())
