@@ -1,2 +1,2 @@
-web: python api/manage.py runserver 127.0.0.1:8000
+web: gunicorn api/api/wsgi.py runserver
 release: python api/manage.py migrate
